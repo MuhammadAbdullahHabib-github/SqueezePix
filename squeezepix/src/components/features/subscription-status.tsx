@@ -98,7 +98,7 @@ export function SubscriptionStatus() {
       {/* Features reminder */}
       <div className="mt-3 border-t border-primary/10 pt-3">
         <p className="text-[10px] text-muted-foreground">
-          You have access to all Pro features including AI alt text, 50-image batches, and custom presets.
+          You have unlimited images per day with all features included.
         </p>
       </div>
     </div>

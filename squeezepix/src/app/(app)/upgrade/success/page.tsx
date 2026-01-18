@@ -8,9 +8,9 @@ import { CheckCircle2, Loader2, ArrowRight, Sparkles, Zap, Crown } from 'lucide-
 import Link from 'next/link';
 
 const features = [
-  { icon: Sparkles, text: 'AI-powered alt text generation' },
-  { icon: Zap, text: 'Up to 50 images per batch' },
-  { icon: Crown, text: 'Custom presets' },
+  { icon: Zap, text: 'Unlimited images per day' },
+  { icon: Sparkles, text: 'All features included' },
+  { icon: Crown, text: 'Priority support' },
 ];
 
 /**
