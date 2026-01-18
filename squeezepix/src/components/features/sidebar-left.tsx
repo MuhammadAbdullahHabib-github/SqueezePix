@@ -35,6 +35,8 @@ export function SidebarLeft() {
 
     const webpStep = steps.find((s) => s.type === 'convertWebp');
     const geoTagStep = steps.find((s) => s.type === 'geoTag');
+    const compressStep = steps.find((s) => s.type === 'compress');
+    const compressionQuality = compressStep?.settings?.quality ?? 80;
 
     const webpEnabled = webpStep?.enabled;
     const geoTagEnabled = geoTagStep?.enabled;
@@ -49,6 +51,21 @@ export function SidebarLeft() {
             case 'altText': return Sparkles;
             default: return ChevronRight;
         }
+    };
+
+    const handleQualityChange = (value: number[]) => {
+        if (compressStep) {
+            updateStepSettings(compressStep.id, { quality: value[0] });
+        }
+    };
+
+    // Get quality label based on value
+    const getQualityLabel = (quality: number): string => {
+        if (quality >= 90) return 'Highest';
+        if (quality >= 80) return 'High';
+        if (quality >= 60) return 'Medium';
+        if (quality >= 40) return 'Low';
+        return 'Lowest';
     };
 
     const handleGeoLocationChange = (location: GeoLocation | null) => {
@@ -145,12 +162,26 @@ export function SidebarLeft() {
                                     />
                                 </div>
 
-                                {/* Compression Settings - Smart auto compression like TinyPNG */}
+                                {/* Compression Quality Slider */}
                                 {isCompress && step.enabled && (
-                                    <div className="mx-2 mb-1 mt-0.5 rounded-md bg-muted/30 px-2 py-1.5">
-                                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                            <span className="text-emerald-500">✓</span>
-                                            <span>Smart compression - automatically optimizes for best quality & size</span>
+                                    <div className="mx-2 mb-1 mt-0.5 rounded-md bg-muted/30 px-2 py-2">
+                                        <div className="mb-2 flex items-center justify-between">
+                                            <span className="text-xs font-medium text-muted-foreground">Quality</span>
+                                            <span className="text-xs font-medium">
+                                                {compressionQuality}% <span className="text-muted-foreground">({getQualityLabel(compressionQuality)})</span>
+                                            </span>
+                                        </div>
+                                        <Slider
+                                            value={[compressionQuality]}
+                                            onValueChange={handleQualityChange}
+                                            min={10}
+                                            max={100}
+                                            step={5}
+                                            className="w-full"
+                                        />
+                                        <div className="mt-1.5 flex justify-between text-[10px] text-muted-foreground">
+                                            <span>Smaller</span>
+                                            <span>Better</span>
                                         </div>
                                     </div>
                                 )}
