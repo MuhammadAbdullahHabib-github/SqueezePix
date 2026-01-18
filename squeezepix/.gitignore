@@ -49,3 +49,7 @@ next-env.d.ts
 # Cache
 .eslintcache
 .cache/
+.env*.local
+
+# clerk configuration (can include secrets)
+/.clerk/
