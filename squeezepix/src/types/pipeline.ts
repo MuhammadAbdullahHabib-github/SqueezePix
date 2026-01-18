@@ -94,6 +94,6 @@ export const DEFAULT_PIPELINE_STEPS: PipelineStep[] = [
     icon: '✦',
     enabled: false,
     order: 5,
-    requiresPro: false,
+    requiresPro: true,
   },
 ];

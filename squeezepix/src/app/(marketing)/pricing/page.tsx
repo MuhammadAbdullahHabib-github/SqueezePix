@@ -38,13 +38,13 @@ export default function PricingPage() {
             </p>
 
             <ul className="mt-8 space-y-4">
-              <Feature text="10 images per batch" />
+              <Feature text="10 images per day (no account)" />
+              <Feature text="20 images per day (with account)" />
               <Feature text="Image compression" />
               <Feature text="WebP conversion" />
               <Feature text="EXIF removal" />
               <Feature text="Geo-tagging" />
               <Feature text="ZIP download" />
-              <Feature text="No account required" muted />
             </ul>
 
             <Link href="/app" className="mt-8 block">
@@ -67,20 +67,16 @@ export default function PricingPage() {
               <h2 className="text-xl font-semibold">Pro</h2>
             </div>
             <div className="mt-4">
-              <span className="text-4xl font-bold">$9</span>
+              <span className="text-4xl font-bold">$5</span>
               <span className="text-muted-foreground">/month</span>
             </div>
-            <p className="mt-1 text-sm text-muted-foreground">
-              or $49/year (save $59)
-            </p>
             <p className="mt-2 text-sm text-muted-foreground">
               For power users and professionals.
             </p>
 
             <ul className="mt-8 space-y-4">
-              <Feature text="50 images per batch" highlight />
+              <Feature text="Unlimited images" highlight />
               <Feature text="AI alt text generation" highlight />
-              <Feature text="Custom presets" highlight />
               <Feature text="Priority support" highlight />
               <Feature text="All Free features" />
               <Feature text="Early access to new features" />
@@ -88,11 +84,11 @@ export default function PricingPage() {
 
             <Link href="/app" className="mt-8 block">
               <Button className="w-full gap-2">
-                Start Free Trial <ArrowRight className="h-4 w-4" />
+                Upgrade to Pro <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              7-day free trial. Cancel anytime.
+              Cancel anytime.
             </p>
           </div>
 
@@ -103,19 +99,19 @@ export default function PricingPage() {
               <h2 className="text-xl font-semibold">Lifetime</h2>
             </div>
             <div className="mt-4">
-              <span className="text-4xl font-bold">$99</span>
+              <span className="text-4xl font-bold">$50</span>
               <span className="text-muted-foreground"> one-time</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              Pay once, use forever. Support indie development.
+              Pay once, use forever. Best value.
             </p>
 
             <ul className="mt-8 space-y-4">
               <Feature text="All Pro features" />
+              <Feature text="Unlimited images forever" />
               <Feature text="Lifetime updates" />
               <Feature text="No subscription" />
-              <Feature text="Support the indie dev" />
-              <Feature text="Early adopter badge" />
+              <Feature text="Support indie development" />
             </ul>
 
             <Link href="/app" className="mt-8 block">

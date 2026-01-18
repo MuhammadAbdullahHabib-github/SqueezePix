@@ -125,8 +125,8 @@ export function SidebarLeft() {
 
                         // Disable Geo-Tag when WebP is enabled
                         const isGeoTagDisabled = isGeoTag && webpEnabled;
-                        // AI Alt Text is now available to all users (temporary)
-                        const isAltTextLocked = false;
+                        // Check if AI alt text is locked for free users
+                        const isAltTextLocked = isAltText && !isPro && !canUseAI;
 
                         return (
                             <div key={step.id} className="flex flex-col">

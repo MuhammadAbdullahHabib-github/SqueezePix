@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { validateImageFile } from '@/lib/image/utils';
 import { useImageStore } from '@/stores/image-store';
-import { MAX_BATCH_SIZE_FREE } from '@/types/image';
+import { useAnonymousUsage } from '@/hooks/use-anonymous-usage';
 
 interface DropZoneProps {
   maxFiles?: number;
@@ -14,11 +14,12 @@ interface DropZoneProps {
 }
 
 export function DropZone({
-  maxFiles = MAX_BATCH_SIZE_FREE,
+  maxFiles = 100, // Allow uploading many files, processing will handle daily limit
   className,
   onFilesAdded,
   onLimitReached,
 }: DropZoneProps) {
+  const { remainingToday, dailyLimit, isUnlimited } = useAnonymousUsage();
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
@@ -158,7 +159,7 @@ export function DropZone({
               {isDragging ? 'Drop images here' : 'Drop images here'}
             </p>
             <p className="text-xs text-muted-foreground">
-              or click to browse (max {maxFiles})
+              or click to browse {!isUnlimited && `(${remainingToday} remaining today)`}
             </p>
           </div>
 

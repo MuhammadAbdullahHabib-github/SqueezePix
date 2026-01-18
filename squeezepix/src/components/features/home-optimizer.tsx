@@ -264,11 +264,11 @@ export function HomeOptimizer() {
       {totalCount === 0 && (
         <div className="text-center text-sm text-muted-foreground">
           <p>
-            Free tier: {freeLimit} images per batch.{' '}
+            Free: {freeLimit} images/day.{' '}
             <Link href="/pricing" className="text-primary hover:underline">
               Upgrade to Pro
             </Link>{' '}
-            for 50 images per batch + AI alt text.
+            for unlimited images + AI alt text.
           </p>
         </div>
       )}
