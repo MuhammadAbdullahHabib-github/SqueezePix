@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
 import { DropZone } from '@/components/features/drop-zone';
 import { ResultsList } from '@/components/features/results-list';
 import { WorkflowPipeline } from '@/components/features/workflow-pipeline';
@@ -33,8 +34,9 @@ export function HomeOptimizer() {
   const processingProgress = useUIStore((state) => state.processingProgress);
 
   // Anonymous usage tracking
-  const { totalProcessed, incrementUsage, hasReachedLimit, shouldShowUpgradePrompt, freeLimit } =
+  const { totalProcessed, incrementUsage, hasReachedLimit, shouldShowUpgradePrompt, freeLimit, anonLimit, signedInLimit } =
     useAnonymousUsage();
+  const { isSignedIn } = useAuth();
 
   // Check if geo-tag is enabled but no location selected
   const steps = usePipelineStore((state) => state.steps);
@@ -263,13 +265,27 @@ export function HomeOptimizer() {
       {/* Empty state CTA */}
       {totalCount === 0 && (
         <div className="text-center text-sm text-muted-foreground">
-          <p>
-            Free: {freeLimit} images/day with all features.{' '}
-            <Link href="/pricing" className="text-primary hover:underline">
-              Upgrade to Pro
-            </Link>{' '}
-            for unlimited images.
-          </p>
+          {!isSignedIn ? (
+            <p>
+              Free: {anonLimit} images/day.{' '}
+              <Link href="/sign-up" className="text-primary font-medium hover:underline">
+                Sign up free
+              </Link>{' '}
+              for {signedInLimit}/day, or{' '}
+              <Link href="/pricing" className="text-primary hover:underline">
+                Go Pro
+              </Link>{' '}
+              for unlimited.
+            </p>
+          ) : (
+            <p>
+              Free: {freeLimit} images/day with all features.{' '}
+              <Link href="/pricing" className="text-primary hover:underline">
+                Upgrade to Pro
+              </Link>{' '}
+              for unlimited images.
+            </p>
+          )}
         </div>
       )}
 

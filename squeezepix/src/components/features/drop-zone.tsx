@@ -1,6 +1,8 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 import { validateImageFile } from '@/lib/image/utils';
 import { useImageStore } from '@/stores/image-store';
@@ -19,7 +21,8 @@ export function DropZone({
   onFilesAdded,
   onLimitReached,
 }: DropZoneProps) {
-  const { remainingToday, dailyLimit, isUnlimited } = useAnonymousUsage();
+  const { remainingToday, dailyLimit, isUnlimited, anonLimit, signedInLimit } = useAnonymousUsage();
+  const { isSignedIn } = useAuth();
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
@@ -166,6 +169,16 @@ export function DropZone({
           <p className="text-[10px] text-muted-foreground">
             JPG, PNG, GIF, WebP up to 50MB each
           </p>
+
+          {/* Sign up prompt for anonymous users */}
+          {!isSignedIn && !isUnlimited && (
+            <p className="mt-1 text-[10px] text-primary">
+              <Link href="/sign-up" className="font-medium hover:underline">
+                Sign up free
+              </Link>
+              {' '}to get {signedInLimit} images/day instead of {anonLimit}
+            </p>
+          )}
         </div>
       </label>
 
