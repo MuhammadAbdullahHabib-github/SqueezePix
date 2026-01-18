@@ -148,12 +148,6 @@ export function generatePlanCheckoutUrl(
     email?: string;
   }
 ): string | null {
-  // In development mode, use the dummy checkout page
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    const origin = window.location.origin;
-    return `${origin}/upgrade/checkout?plan=${planType}`;
-  }
-
   const variantId = getVariantId(planType);
 
   if (!variantId || variantId === '000000') {
@@ -174,13 +168,8 @@ export function generatePlanCheckoutUrl(
 
 /**
  * Check if LemonSqueezy checkout is available
- * Returns true in development mode (uses dummy checkout) or when properly configured
  */
 export function isCheckoutAvailable(): boolean {
-  // Always available in development mode (uses dummy checkout)
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    return true;
-  }
   return getLemonSqueezyConfig().isConfigured;
 }
 
