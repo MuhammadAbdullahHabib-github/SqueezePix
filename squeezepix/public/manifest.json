@@ -1,0 +1,27 @@
+{
+  "name": "SqueezePix",
+  "short_name": "SqueezePix",
+  "description": "Browser-based image optimization - compress, convert to WebP, remove EXIF, and generate AI alt text",
+  "start_url": "/app",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366F1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities", "photo"],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
