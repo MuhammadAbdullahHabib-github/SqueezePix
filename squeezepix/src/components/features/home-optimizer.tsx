@@ -130,25 +130,14 @@ export function HomeOptimizer() {
       };
     }
 
-    // Check if geo-tag needs a location
-    if (geoTagMissingLocation) {
-      return {
-        label: pendingCount === 1 ? 'Optimize' : 'Optimize All',
-        action: () => {},
-        disabled: true,
-        showSpinner: false,
-        icon: <AlertCircle className="h-3.5 w-3.5" />,
-        warning: 'Select a city for Geo-Tag',
-      };
-    }
-
+    // Show warning if geo-tag is enabled but no location (but don't disable)
     return {
       label: pendingCount === 1 ? 'Optimize' : 'Optimize All',
       action: processAllImages,
       disabled: pendingCount === 0,
       showSpinner: false,
       icon: <span>▶</span>,
-      warning: null,
+      warning: geoTagMissingLocation ? 'Geo-Tag enabled but no location set (will be skipped)' : null,
     };
   };
 
