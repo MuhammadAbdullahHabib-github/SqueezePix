@@ -264,11 +264,11 @@ export function HomeOptimizer() {
       {totalCount === 0 && (
         <div className="text-center text-sm text-muted-foreground">
           <p>
-            Free: {freeLimit} images/day.{' '}
+            Free: {freeLimit} images/day with all features.{' '}
             <Link href="/pricing" className="text-primary hover:underline">
               Upgrade to Pro
             </Link>{' '}
-            for unlimited images + AI alt text.
+            for unlimited images.
           </p>
         </div>
       )}

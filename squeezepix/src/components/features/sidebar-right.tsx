@@ -109,12 +109,12 @@ export function SidebarRight() {
                         {/* Feature highlights */}
                         <div className="mt-3 space-y-1.5">
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                                <span>AI-powered alt text</span>
+                                <Zap className="h-3.5 w-3.5 text-primary" />
+                                <span>Unlimited images per day</span>
                             </div>
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <Zap className="h-3.5 w-3.5 text-primary" />
-                                <span>50 images per batch</span>
+                                <Sparkles className="h-3.5 w-3.5 text-primary" />
+                                <span>All features included</span>
                             </div>
                         </div>
 

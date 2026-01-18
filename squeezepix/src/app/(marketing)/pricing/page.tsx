@@ -40,6 +40,7 @@ export default function PricingPage() {
             <ul className="mt-8 space-y-4">
               <Feature text="10 images per day (no account)" />
               <Feature text="20 images per day (with account)" />
+              <Feature text="AI alt text generation" />
               <Feature text="Image compression" />
               <Feature text="WebP conversion" />
               <Feature text="EXIF removal" />
@@ -69,16 +70,18 @@ export default function PricingPage() {
             <div className="mt-4">
               <span className="text-4xl font-bold">$5</span>
               <span className="text-muted-foreground">/month</span>
+              <span className="mx-2 text-muted-foreground">or</span>
+              <span className="text-2xl font-bold">$20</span>
+              <span className="text-muted-foreground">/year</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              For power users and professionals.
+              For power users who need unlimited processing.
             </p>
 
             <ul className="mt-8 space-y-4">
-              <Feature text="Unlimited images" highlight />
-              <Feature text="AI alt text generation" highlight />
+              <Feature text="Unlimited images per day" highlight />
               <Feature text="Priority support" highlight />
-              <Feature text="All Free features" />
+              <Feature text="All Free features included" />
               <Feature text="Early access to new features" />
             </ul>
 

@@ -54,20 +54,19 @@ export function UpgradeModal({
   const getFeatureMessage = () => {
     switch (feature) {
       case 'ai':
-        return 'AI-powered alt text generation is a Pro feature.';
+        return 'Upgrade for unlimited image processing.';
       case 'batch':
-        return `Free tier is limited to ${batchLimit ?? 10} images at a time.`;
+        return `Free tier is limited to ${batchLimit ?? 10} images per day.`;
       case 'presets':
-        return 'Custom presets are a Pro feature.';
+        return 'Upgrade for unlimited image processing.';
       default:
-        return 'This feature requires a Pro subscription.';
+        return 'Upgrade for unlimited image processing.';
     }
   };
 
   const features = [
-    { icon: Sparkles, text: 'AI Alt Text Generation' },
-    { icon: Zap, text: 'Up to 50 images per batch' },
-    { icon: Crown, text: 'Custom presets' },
+    { icon: Zap, text: 'Unlimited images per day' },
+    { icon: Sparkles, text: 'All features included' },
     { icon: Check, text: 'Priority support' },
   ];
 

@@ -31,44 +31,44 @@ export const TIERS: Record<TierType, Tier> = {
   free: {
     id: 'free',
     name: 'Free',
-    description: 'Basic image optimization',
+    description: 'All features with daily limits',
     limits: {
-      maxBatchSize: 10,
-      aiEnabled: false,
+      maxBatchSize: 20, // Daily limit for signed up users
+      aiEnabled: true, // AI is free for everyone
       geoTagEnabled: true,
-      customPresetsEnabled: false,
+      customPresetsEnabled: true,
       prioritySupport: false,
     },
   },
   pro: {
     id: 'pro',
     name: 'Pro',
-    description: 'Full access to all features',
+    description: 'Unlimited images',
     limits: {
-      maxBatchSize: 50,
+      maxBatchSize: Infinity,
       aiEnabled: true,
       geoTagEnabled: true,
       customPresetsEnabled: true,
       prioritySupport: true,
     },
     price: {
-      monthly: 9,
-      yearly: 49,
+      monthly: 5,
+      yearly: 20,
     },
   },
   lifetime: {
     id: 'lifetime',
     name: 'Lifetime',
-    description: 'One-time purchase, lifetime access',
+    description: 'One-time purchase, unlimited forever',
     limits: {
-      maxBatchSize: 50,
+      maxBatchSize: Infinity,
       aiEnabled: true,
       geoTagEnabled: true,
       customPresetsEnabled: true,
       prioritySupport: true,
     },
     price: {
-      lifetime: 99,
+      lifetime: 50,
     },
   },
 };
