@@ -36,7 +36,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-              Compress, convert to WebP, remove EXIF data, add geo-tags, and
+              Compress, crop, convert to WebP, remove EXIF data, add geo-tags, and
               generate AI alt text. All in one tool that runs entirely in your
               browser.
             </p>
