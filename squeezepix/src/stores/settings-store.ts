@@ -10,7 +10,6 @@ interface SettingsStore {
   defaultCity: GeoCity | null;
 
   // Export settings
-  includeMetadataJson: boolean;
   includeMetadataCsv: boolean;
 
   // UI preferences
@@ -20,7 +19,6 @@ interface SettingsStore {
   // Actions
   setDefaultQuality: (quality: number) => void;
   setDefaultCity: (city: GeoCity | null) => void;
-  toggleMetadataJson: () => void;
   toggleMetadataCsv: () => void;
   toggleShowPreview: () => void;
   toggleAutoProcess: () => void;
@@ -30,8 +28,7 @@ interface SettingsStore {
 const DEFAULT_SETTINGS = {
   defaultQuality: 80,
   defaultCity: null,
-  includeMetadataJson: true,
-  includeMetadataCsv: false,
+  includeMetadataCsv: true,
   showPreview: true,
   autoProcess: false,
 };
@@ -47,10 +44,6 @@ export const useSettingsStore = create<SettingsStore>()(
 
       setDefaultCity: (city: GeoCity | null) => {
         set({ defaultCity: city });
-      },
-
-      toggleMetadataJson: () => {
-        set((state) => ({ includeMetadataJson: !state.includeMetadataJson }));
       },
 
       toggleMetadataCsv: () => {

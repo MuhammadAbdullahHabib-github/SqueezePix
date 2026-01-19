@@ -20,7 +20,10 @@ import {
     MapPin,
     Sparkles,
     ChevronRight,
-    Edit2
+    Edit2,
+    Crop,
+    Link,
+    Unlink
 } from 'lucide-react';
 
 export function SidebarLeft() {
@@ -36,7 +39,11 @@ export function SidebarLeft() {
     const webpStep = steps.find((s) => s.type === 'convertWebp');
     const geoTagStep = steps.find((s) => s.type === 'geoTag');
     const compressStep = steps.find((s) => s.type === 'compress');
+    const cropStep = steps.find((s) => s.type === 'crop');
     const compressionQuality = compressStep?.settings?.quality ?? 80;
+    const cropWidth = cropStep?.settings?.cropWidth;
+    const cropHeight = cropStep?.settings?.cropHeight;
+    const maintainAspectRatio = cropStep?.settings?.maintainAspectRatio ?? true;
 
     const webpEnabled = webpStep?.enabled;
     const geoTagEnabled = geoTagStep?.enabled;
@@ -49,6 +56,7 @@ export function SidebarLeft() {
             case 'removeExif': return Shield;
             case 'geoTag': return MapPin;
             case 'altText': return Sparkles;
+            case 'crop': return Crop;
             default: return ChevronRight;
         }
     };
@@ -56,6 +64,26 @@ export function SidebarLeft() {
     const handleQualityChange = (value: number[]) => {
         if (compressStep) {
             updateStepSettings(compressStep.id, { quality: value[0] });
+        }
+    };
+
+    const handleCropWidthChange = (value: string) => {
+        if (cropStep) {
+            const width = value ? parseInt(value, 10) : undefined;
+            updateStepSettings(cropStep.id, { cropWidth: width });
+        }
+    };
+
+    const handleCropHeightChange = (value: string) => {
+        if (cropStep) {
+            const height = value ? parseInt(value, 10) : undefined;
+            updateStepSettings(cropStep.id, { cropHeight: height });
+        }
+    };
+
+    const handleAspectRatioToggle = () => {
+        if (cropStep) {
+            updateStepSettings(cropStep.id, { maintainAspectRatio: !maintainAspectRatio });
         }
     };
 
@@ -122,6 +150,7 @@ export function SidebarLeft() {
                         const isCompress = step.type === 'compress';
                         const isGeoTag = step.type === 'geoTag';
                         const isAltText = step.type === 'altText';
+                        const isCrop = step.type === 'crop';
 
                         // Disable Geo-Tag when WebP is enabled
                         const isGeoTagDisabled = isGeoTag && webpEnabled;
@@ -186,7 +215,63 @@ export function SidebarLeft() {
                                     </div>
                                 )}
 
-                                
+                                {/* Crop/Resize Settings */}
+                                {isCrop && step.enabled && (
+                                    <div className="mx-2 mb-1 mt-0.5 rounded-md bg-muted/30 px-2 py-2">
+                                        <div className="mb-2 flex items-center justify-between">
+                                            <span className="text-xs font-medium text-muted-foreground">Dimensions</span>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="h-5 px-1.5 text-xs"
+                                                onClick={handleAspectRatioToggle}
+                                                title={maintainAspectRatio ? "Lock aspect ratio" : "Unlock aspect ratio"}
+                                            >
+                                                {maintainAspectRatio ? (
+                                                    <Link className="h-3 w-3" />
+                                                ) : (
+                                                    <Unlink className="h-3 w-3" />
+                                                )}
+                                            </Button>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex-1">
+                                                <label className="mb-0.5 block text-[10px] text-muted-foreground">Width (px)</label>
+                                                <Input
+                                                    type="number"
+                                                    placeholder="Auto"
+                                                    value={cropWidth || ''}
+                                                    onChange={(e) => handleCropWidthChange(e.target.value)}
+                                                    className="h-7 text-xs"
+                                                    min={1}
+                                                    max={10000}
+                                                />
+                                            </div>
+                                            <span className="mt-4 text-xs text-muted-foreground">×</span>
+                                            <div className="flex-1">
+                                                <label className="mb-0.5 block text-[10px] text-muted-foreground">Height (px)</label>
+                                                <Input
+                                                    type="number"
+                                                    placeholder="Auto"
+                                                    value={cropHeight || ''}
+                                                    onChange={(e) => handleCropHeightChange(e.target.value)}
+                                                    className="h-7 text-xs"
+                                                    min={1}
+                                                    max={10000}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="mt-1.5 text-[10px] text-muted-foreground">
+                                            {!cropWidth && !cropHeight ? (
+                                                <span>Set width and/or height to resize</span>
+                                            ) : maintainAspectRatio ? (
+                                                <span>Aspect ratio will be maintained</span>
+                                            ) : (
+                                                <span>Image will be stretched to fit</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Nested City Display for Geo-Tag step */}
                                 {isGeoTag && step.enabled && !isGeoTagDisabled && (

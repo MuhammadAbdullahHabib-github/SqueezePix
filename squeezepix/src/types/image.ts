@@ -49,10 +49,12 @@ export interface ProcessingResult {
   // Track which steps were actually applied
   stepsApplied?: {
     removeExif?: StepResult;
+    crop?: StepResult;
     compress?: StepResult;
     geoTag?: StepResult;
     convertWebp?: StepResult;
     altText?: StepResult;
+    formatConversion?: StepResult;
   };
 }
 

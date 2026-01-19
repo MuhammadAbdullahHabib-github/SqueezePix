@@ -10,16 +10,14 @@ import { Button } from '@/components/ui/button';
 import { UpgradeModal } from '@/components/features/upgrade-modal';
 import { SubscriptionStatus } from '@/components/features/subscription-status';
 import { cn } from '@/lib/utils';
-import { FileJson, FileSpreadsheet, Sparkles, Zap, Crown } from 'lucide-react';
+import { FileSpreadsheet, Sparkles, Zap, Crown } from 'lucide-react';
 
 export function SidebarRight() {
     const steps = usePipelineStore((state) => state.steps);
     const updateStepSettings = usePipelineStore((state) => state.updateStepSettings);
     const { isPro, tier } = useLicense();
 
-    const includeMetadataJson = useSettingsStore((state) => state.includeMetadataJson);
     const includeMetadataCsv = useSettingsStore((state) => state.includeMetadataCsv);
-    const toggleMetadataJson = useSettingsStore((state) => state.toggleMetadataJson);
     const toggleMetadataCsv = useSettingsStore((state) => state.toggleMetadataCsv);
 
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -61,16 +59,6 @@ export function SidebarRight() {
                 <div className="space-y-2">
                     <label className="flex cursor-pointer items-center justify-between rounded-md px-3 py-2 transition-colors hover:bg-muted/50">
                         <div className="flex items-center gap-3">
-                            <FileJson className="h-4 w-4" />
-                            <span className="text-sm font-medium">metadata.json</span>
-                        </div>
-                        <Switch
-                            checked={includeMetadataJson}
-                            onCheckedChange={toggleMetadataJson}
-                        />
-                    </label>
-                    <label className="flex cursor-pointer items-center justify-between rounded-md px-3 py-2 transition-colors hover:bg-muted/50">
-                        <div className="flex items-center gap-3">
                             <FileSpreadsheet className="h-4 w-4" />
                             <span className="text-sm font-medium">metadata.csv</span>
                         </div>
@@ -83,7 +71,7 @@ export function SidebarRight() {
                 <div className="flex gap-2 rounded-md bg-muted/50 p-2">
                     <span className="text-xs text-muted-foreground">📋</span>
                     <p className="text-xs text-muted-foreground">
-                        Metadata files include filenames, alt text, and compression stats.
+                        CSV includes filenames, alt text, and compression stats.
                     </p>
                 </div>
             </div>

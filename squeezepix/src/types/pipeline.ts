@@ -2,7 +2,7 @@
  * Pipeline types for customizable processing workflow
  */
 
-export type PipelineStepType = 'removeExif' | 'compress' | 'geoTag' | 'convertWebp' | 'altText';
+export type PipelineStepType = 'removeExif' | 'compress' | 'geoTag' | 'convertWebp' | 'altText' | 'crop';
 
 export interface PipelineStep {
   id: string;
@@ -23,6 +23,12 @@ export interface GeoTagSettings {
   countryName?: string;
 }
 
+export interface CropSettings {
+  width?: number;
+  height?: number;
+  maintainAspectRatio?: boolean;
+}
+
 export interface PipelineStepSettings {
   // Compression settings
   quality?: number;
@@ -33,6 +39,11 @@ export interface PipelineStepSettings {
 
   // Alt text settings
   keywords?: string[];
+
+  // Crop settings
+  cropWidth?: number;
+  cropHeight?: number;
+  maintainAspectRatio?: boolean;
 }
 
 export interface Pipeline {
@@ -60,12 +71,22 @@ export const DEFAULT_PIPELINE_STEPS: PipelineStep[] = [
     requiresPro: false,
   },
   {
+    id: 'step-crop',
+    type: 'crop',
+    label: 'Crop/Resize',
+    icon: '⬒',
+    enabled: false,
+    order: 2,
+    requiresPro: false,
+    settings: { cropWidth: undefined, cropHeight: undefined, maintainAspectRatio: true },
+  },
+  {
     id: 'step-compress',
     type: 'compress',
     label: 'Compress',
     icon: '◐',
     enabled: true,
-    order: 2,
+    order: 3,
     requiresPro: false,
     settings: { quality: 80 },
   },
@@ -75,7 +96,7 @@ export const DEFAULT_PIPELINE_STEPS: PipelineStep[] = [
     label: 'Geo-Tag',
     icon: '📍',
     enabled: true,
-    order: 3,
+    order: 4,
     requiresPro: false,
   },
   {
@@ -84,7 +105,7 @@ export const DEFAULT_PIPELINE_STEPS: PipelineStep[] = [
     label: 'WebP',
     icon: '◲',
     enabled: true,
-    order: 4,
+    order: 5,
     requiresPro: false,
   },
   {
@@ -93,7 +114,7 @@ export const DEFAULT_PIPELINE_STEPS: PipelineStep[] = [
     label: 'AI Alt Text',
     icon: '✦',
     enabled: false,
-    order: 5,
+    order: 6,
     requiresPro: false,
   },
 ];

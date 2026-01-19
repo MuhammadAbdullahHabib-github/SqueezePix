@@ -2,7 +2,6 @@ import JSZip from 'jszip';
 import type { ProcessingResult } from '@/types/image';
 
 export interface ZipOptions {
-  includeMetadataJson?: boolean;
   includeMetadataCsv?: boolean;
 }
 
@@ -44,12 +43,6 @@ export async function generateZip(
       width: result.width,
       height: result.height,
     });
-  }
-
-  // Add metadata.json if requested
-  if (options.includeMetadataJson) {
-    const jsonContent = JSON.stringify(metadata, null, 2);
-    zip.file('metadata.json', jsonContent);
   }
 
   // Add metadata.csv if requested

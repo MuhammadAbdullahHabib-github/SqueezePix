@@ -30,7 +30,6 @@ export default function AppPage() {
 
   // Check if geo-tag is enabled but no location selected
   const steps = usePipelineStore((state) => state.steps);
-  const includeMetadataJson = useSettingsStore((state) => state.includeMetadataJson);
   const includeMetadataCsv = useSettingsStore((state) => state.includeMetadataCsv);
   const geoTagStep = steps.find((s) => s.type === 'geoTag');
   const webpStep = steps.find((s) => s.type === 'convertWebp');
@@ -76,7 +75,6 @@ export default function AppPage() {
           result: img.result!,
         })),
         {
-          includeMetadataJson,
           includeMetadataCsv,
         }
       );

@@ -11,6 +11,7 @@ import { convertToWebp } from '@/lib/image/webp';
 import { convertToJpeg } from '@/lib/image/convert-to-jpeg';
 import { geoTagImage } from '@/lib/image/geo-tag';
 import { generateAltText } from '@/lib/ai/generate-alt-text';
+import { cropImage, hasCropSettings } from '@/lib/image/crop';
 import type { ImageFile, ExifMetadata, StepResult, ProcessingResult } from '@/types/image';
 import { MAX_BATCH_SIZE_FREE, MAX_BATCH_SIZE_PRO } from '@/types/image';
 
@@ -90,6 +91,27 @@ export function useImageProcessor() {
                 stepsApplied.removeExif = { applied: true };
               } else {
                 stepsApplied.removeExif = { applied: false, skipped: true, reason: 'Only JPEG files have EXIF data' };
+              }
+              break;
+            }
+            case 'crop': {
+              const cropWidth = step.settings?.cropWidth;
+              const cropHeight = step.settings?.cropHeight;
+              const maintainAspectRatio = step.settings?.maintainAspectRatio ?? true;
+
+              if (hasCropSettings({ width: cropWidth, height: cropHeight })) {
+                const cropResult = await cropImage(processedFile, {
+                  width: cropWidth,
+                  height: cropHeight,
+                  maintainAspectRatio,
+                });
+                processedFile = cropResult.file;
+                stepsApplied.crop = {
+                  applied: true,
+                  reason: `${cropResult.newWidth}×${cropResult.newHeight}px`,
+                };
+              } else {
+                stepsApplied.crop = { applied: false, skipped: true, reason: 'No dimensions set' };
               }
               break;
             }
